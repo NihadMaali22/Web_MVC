@@ -1,0 +1,102 @@
+@model lily.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        @await Html.PartialAsync("_Notifications")
+        
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-white text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Create Account</h2>
+                <p class="text-gray-600 mt-2">Join Lily's Toy Store today!</p>
+            </div>
+
+            <form method="post" asp-action="Register">
+                @Html.AntiForgeryToken()
+                
+                <div class="mb-4">
+                    <label asp-for="Username" class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-user mr-2 text-green-500"></i> Username
+                    </label>
+                    <input asp-for="Username" 
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none transition-colors" 
+                           placeholder="Choose a username"
+                           required />
+                    <span asp-validation-for="Username" class="text-red-500 text-sm"></span>
+                </div>
+                
+                <div class="mb-4">
+                    <label asp-for="FullName" class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-id-card mr-2 text-green-500"></i> Full Name
+                    </label>
+                    <input asp-for="FullName" 
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none transition-colors" 
+                           placeholder="Enter your full name"
+                           required />
+                    <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+                </div>
+                
+                <div class="mb-4">
+                    <label asp-for="Email" class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-envelope mr-2 text-green-500"></i> Email
+                    </label>
+                    <input asp-for="Email" 
+                           type="email" 
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none transition-colors" 
+                           placeholder="your@email.com"
+                           required />
+                    <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                </div>
+                
+                <div class="mb-4">
+                    <label asp-for="Password" class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-lock mr-2 text-green-500"></i> Password
+                    </label>
+                    <input asp-for="Password" 
+                           type="password" 
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none transition-colors" 
+                           placeholder="Create a password"
+                           required />
+                    <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-lock mr-2 text-green-500"></i> Confirm Password
+                    </label>
+                    <input type="password" 
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-green-500 focus:outline-none transition-colors" 
+                           id="confirmPassword" 
+                           name="confirmPassword" 
+                           placeholder="Confirm your password"
+                           required />
+                </div>
+                
+                <button type="submit" 
+                        class="w-full py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-user-plus mr-2"></i> Register
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">
+                    Already have an account? 
+                    <a asp-action="Login" class="text-green-500 font-semibold hover:text-green-600 transition-colors">
+                        Login here
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

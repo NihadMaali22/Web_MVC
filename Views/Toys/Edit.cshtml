@@ -1,0 +1,79 @@
+@model lily.Models.Toy
+
+@{
+    ViewData["Title"] = "Edit Toy";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Edit Toy</h2>
+            <hr />
+            
+            <form method="post" asp-action="Edit">
+                <input type="hidden" asp-for="ToyID" />
+                
+                <div class="mb-3">
+                    <label asp-for="ToyName" class="form-label">Toy Name</label>
+                    <input asp-for="ToyName" class="form-control" required />
+                    <span asp-validation-for="ToyName" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label">Category</label>
+                    <select asp-for="Category" class="form-select">
+                        <option value="">Select a category</option>
+                        <option value="Action Figures">Action Figures</option>
+                        <option value="Dolls">Dolls</option>
+                        <option value="Educational">Educational</option>
+                        <option value="Puzzles">Puzzles</option>
+                        <option value="Board Games">Board Games</option>
+                        <option value="Building Blocks">Building Blocks</option>
+                        <option value="Remote Control">Remote Control</option>
+                        <option value="Outdoor Toys">Outdoor Toys</option>
+                        <option value="Stuffed Animals">Stuffed Animals</option>
+                        <option value="Arts & Crafts">Arts & Crafts</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Price</label>
+                    <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="Stock" class="form-label">Stock Quantity</label>
+                    <input asp-for="Stock" type="number" class="form-control" required />
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label">Image URL</label>
+                    <input asp-for="ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" name="IsActive" class="form-check-input" id="isActiveCheck" value="true" @(Model.IsActive == true ? "checked" : "") />
+                    <input type="hidden" name="IsActive" value="false" />
+                    <label class="form-check-label" for="isActiveCheck">Active</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,89 @@
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @await Html.PartialAsync("_Notifications")
+    
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-shopping-cart text-white text-3xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800">Place New Order</h1>
+            <p class="text-gray-600 mt-2">Select a toy and quantity to place your order</p>
+        </div>
+        
+        <form method="post" asp-action="Create">
+            @Html.AntiForgeryToken()
+            
+            <div class="mb-6">
+                <label for="toyId" class="block text-gray-700 font-semibold mb-2">
+                    <i class="fas fa-cube text-primary mr-2"></i> Select Toy
+                </label>
+                <select name="toyId" 
+                        id="toyId" 
+                        class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-primary focus:outline-none transition-colors" 
+                        required>
+                    <option value="">-- Select a Toy --</option>
+                    @if (ViewBag.Toys != null)
+                    {
+                        @foreach (var toy in ViewBag.Toys)
+                        {
+                            <option value="@toy.ToyId">@toy.ToyName - $@toy.Price.ToString("F2") (Stock: @toy.Stock)</option>
+                        }
+                    }
+                </select>
+            </div>
+            
+            <div class="mb-6">
+                <label for="quantity" class="block text-gray-700 font-semibold mb-2">
+                    <i class="fas fa-sort-numeric-up text-primary mr-2"></i> Quantity
+                </label>
+                <input type="number" 
+                       class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-primary focus:outline-none transition-colors" 
+                       id="quantity" 
+                       name="quantity" 
+                       min="1" 
+                       value="1" 
+                       required />
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-lg">
+                <div class="flex items-start">
+                    <i class="fas fa-info-circle text-blue-500 text-xl mr-3 mt-1"></i>
+                    <div>
+                        <p class="font-semibold text-blue-800">Note</p>
+                        <p class="text-blue-700">Total price will be calculated based on the selected toy and quantity.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <button type="submit" 
+                        class="flex-1 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-check-circle mr-2"></i> Place Order
+                </button>
+                <a asp-action="Index" 
+                   class="flex-1 py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors text-center">
+                    <i class="fas fa-times mr-2"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-update quantity max based on selected toy
+        document.getElementById('toyId').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value) {
+                var stockText = selectedOption.text.match(/Stock: (\d+)/);
+                if (stockText && stockText[1]) {
+                    document.getElementById('quantity').setAttribute('max', stockText[1]);
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,152 @@
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @await Html.PartialAsync("_Notifications")
+    
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-12 mb-12 text-center">
+        <h1 class="text-5xl font-bold mb-4">About Lily's Toy Store</h1>
+        <p class="text-xl text-pink-100">Where imagination comes to life!</p>
+    </div>
+
+    <!-- Our Story -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+        <div class="flex items-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4">
+                <i class="fas fa-book-open text-white text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">Our Story</h2>
+        </div>
+        
+        <div class="prose prose-lg max-w-none text-gray-600">
+            <p class="mb-4">
+                Welcome to Lily's Toy Store, where imagination comes to life! We've been bringing joy to children 
+                and families since our founding, offering a carefully curated selection of high-quality toys that 
+                inspire creativity and wonder.
+            </p>
+            <p class="mb-4">
+                Our journey began with a simple vision: to create a magical place where every child could find 
+                the perfect toy to spark their imagination. Today, we're proud to be a trusted destination for 
+                parents, grandparents, and gift-givers looking for exceptional toys that combine fun with learning.
+            </p>
+            <p>
+                At Lily's, we believe that play is essential for childhood development. That's why we hand-select 
+                each toy in our collection, ensuring it meets our high standards for quality, safety, and educational value.
+            </p>
+        </div>
+    </div>
+
+    <!-- Mission & Values -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-heart text-white text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Our Mission</h3>
+            <p class="text-gray-600">
+                To provide safe, educational, and entertaining toys that inspire creativity and foster 
+                development in children of all ages.
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-shield-alt text-white text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Our Values</h3>
+            <p class="text-gray-600">
+                Quality, safety, and customer satisfaction are at the heart of everything we do. 
+                We stand behind every product we sell.
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center transform hover:scale-105 transition-all duration-300">
+            <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-star text-white text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Our Promise</h3>
+            <p class="text-gray-600">
+                We promise to deliver exceptional service, quality products, and a delightful 
+                shopping experience every time.
+            </p>
+        </div>
+    </div>
+
+    <!-- What We Offer -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+        <div class="flex items-center mb-6">
+            <div class="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4">
+                <i class="fas fa-gifts text-white text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">What We Offer</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Wide Selection of Toys</h4>
+                    <p class="text-gray-600">From educational games to creative playsets, we have something for every age and interest.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Safe and Tested Products</h4>
+                    <p class="text-gray-600">All our toys meet or exceed safety standards and are rigorously tested.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Competitive Prices</h4>
+                    <p class="text-gray-600">Quality toys at prices that won't break the bank, with regular special offers.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Fast and Reliable Delivery</h4>
+                    <p class="text-gray-600">Get your toys delivered quickly and safely right to your doorstep.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Excellent Customer Service</h4>
+                    <p class="text-gray-600">Our friendly team is always here to help you find the perfect toy.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-check-circle text-primary text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Gift Wrapping Available</h4>
+                    <p class="text-gray-600">Make your gift extra special with our beautiful wrapping service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-center text-white">
+        <h2 class="text-3xl font-bold mb-4">Have Questions?</h2>
+        <p class="text-xl mb-6 text-pink-100">We'd love to hear from you!</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a asp-controller="Home" asp-action="Contact" 
+               class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <i class="fas fa-envelope mr-2"></i> Contact Us
+            </a>
+            <a asp-controller="Toys" asp-action="Index" 
+               class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-primary transition-all duration-300">
+                <i class="fas fa-shopping-cart mr-2"></i> Shop Now
+            </a>
+        </div>
+    </div>
+</div>

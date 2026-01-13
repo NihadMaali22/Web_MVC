@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Account";
+}
+
+@await Html.PartialAsync("_Notifications")
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Account</h2>
+            <hr />
+            
+            @if (ViewBag.IsLoggedIn == true)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Welcome, @ViewBag.Username</h5>
+                        <p class="card-text">Manage your account settings and view your orders.</p>
+                        
+                        <div class="mt-4">
+                            <h6>Account Information</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Username:</strong> @ViewBag.Username
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Role:</strong> @ViewBag.Role
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4">
+                            <a asp-action="Profile" class="btn btn-primary">Edit Profile</a>
+                            <a asp-controller="Orders" asp-action="Index" class="btn btn-info">View My Orders</a>
+                            <a asp-controller="Orders" asp-action="History" class="btn btn-secondary">Order History</a>
+                            <a asp-action="Logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <p>Please <a asp-action="Login">login</a> to view your account.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

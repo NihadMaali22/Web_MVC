@@ -1,0 +1,50 @@
+@model lily.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>My Profile</h2>
+            <hr />
+            
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" asp-action="Profile">
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Username</label>
+                            <input asp-for="Username" class="form-control" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label">Full Name</label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <input value="@Model.Role" class="form-control" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Member Since</label>
+                            <input value="@Model.CreatedDate?.ToString("MMMM dd, yyyy")" class="form-control" readonly />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <a asp-action="ChangePassword" class="btn btn-warning">Change Password</a>
+                        <a asp-action="Index" class="btn btn-secondary">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

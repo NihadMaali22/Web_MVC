@@ -1,0 +1,86 @@
+@model IEnumerable<lily.Models.Toy>
+
+@{
+    ViewData["Title"] = "Toys";
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @await Html.PartialAsync("_Notifications")
+
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-cubes text-primary"></i> Our Toys Collection
+            </h1>
+            <p class="text-gray-600">
+                @if (!string.IsNullOrEmpty(ViewBag.SelectedCategory))
+                {
+                    <span>Showing: <strong class="text-primary">@ViewBag.SelectedCategory</strong> 
+                    <a asp-action="Index" class="text-secondary hover:underline ml-2">
+                        <i class="fas fa-times-circle"></i> Clear Filter
+                    </a>
+                    </span>
+                }
+                else
+                {
+                    <span>Browse through our amazing selection of toys</span>
+                }
+            </p>
+        </div>
+        @if (ViewBag.IsAdmin == true)
+        {
+            <a asp-action="Create" 
+               class="mt-4 md:mt-0 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <i class="fas fa-plus-circle mr-2"></i> Add New Toy
+            </a>
+        }
+    </div>
+
+    <!-- Category Filter Pills -->
+    @if (ViewBag.Categories != null && ((List<string>)ViewBag.Categories).Any())
+    {
+        <div class="mb-8 bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                <i class="fas fa-filter text-primary mr-2"></i> Filter by Category
+            </h3>
+            <div class="flex flex-wrap gap-3">
+                <a asp-action="Index" 
+                   class="px-4 py-2 rounded-full @(string.IsNullOrEmpty(ViewBag.SelectedCategory) ? "bg-gradient-to-r from-primary to-secondary text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300") transition-all duration-300 font-medium">
+                    <i class="fas fa-th mr-2"></i> All
+                </a>
+                @foreach (var cat in (List<string>)ViewBag.Categories)
+                {
+                    <a asp-action="Index" asp-route-category="@cat" 
+                       class="px-4 py-2 rounded-full @(ViewBag.SelectedCategory == cat ? "bg-gradient-to-r from-primary to-secondary text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300") transition-all duration-300 font-medium">
+                        @cat
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @foreach (var toy in Model)
+            {
+                @await Html.PartialAsync("_ToyCard", toy)
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-20 bg-white rounded-2xl shadow-lg">
+            <i class="fas fa-box-open text-gray-300 text-8xl mb-6"></i>
+            <h3 class="text-2xl font-bold text-gray-700 mb-4">No toys available</h3>
+            <p class="text-gray-500 mb-6">Check back later for new arrivals!</p>
+            @if (ViewBag.IsAdmin == true)
+            {
+                <a asp-action="Create" 
+                   class="inline-block px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-plus-circle mr-2"></i> Add First Toy
+                </a>
+            }
+        </div>
+    }
+</div>

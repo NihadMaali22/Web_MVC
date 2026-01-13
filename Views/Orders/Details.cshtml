@@ -1,0 +1,129 @@
+@model lily.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @await Html.PartialAsync("_Notifications")
+    
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-secondary text-white p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1>Order #@Model.OrderID</h1>
+                    <p class="text-pink-100 mt-1">Order placed on @Model.OrderDate?.ToString("MMMM dd, yyyy")</p>
+                </div>
+                <div>
+                    <span class="px-4 py-2 rounded-full text-sm font-semibold
+                        @(Model.Status == "Completed" ? "bg-green-500" : 
+                          Model.Status == "Pending" ? "bg-yellow-500" : 
+                          Model.Status == "Cancelled" ? "bg-red-500" : "bg-blue-500")">
+                        @Model.Status
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Information -->
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Customer Information -->
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user text-primary mr-2"></i> Customer Information
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-3">
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Name:</span>
+                            <span class="font-semibold text-gray-800">@Model.User.FullName</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Username:</span>
+                            <span class="font-semibold text-gray-800">@Model.User.Username</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Email:</span>
+                            <span class="font-semibold text-gray-800">@Model.User.Email</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-shopping-cart text-primary mr-2"></i> Order Summary
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-3">
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Order Date:</span>
+                            <span class="font-semibold text-gray-800">@Model.OrderDate?.ToString("MMM dd, yyyy HH:mm")</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Toy:</span>
+                            <span class="font-semibold text-gray-800">@Model.Toy.ToyName</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Quantity:</span>
+                            <span class="font-semibold text-gray-800">@Model.Quantity</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-gray-600">Unit Price:</span>
+                            <span class="font-semibold text-gray-800">$@Model.Toy.Price.ToString("F2")</span>
+                        </div>
+                        <div class="flex justify-between pt-2">
+                            <span class="text-gray-800 font-bold text-lg">Total Price:</span>
+                            <span class="font-bold text-primary text-2xl">$@Model.TotalPrice.ToString("F2")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Actions -->
+            @if (ViewBag.IsAdmin == true)
+            {
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-cog text-secondary mr-2"></i> Admin Actions
+                    </h3>
+                    <form method="post" asp-action="UpdateStatus" class="flex flex-wrap items-center gap-4">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.OrderID" />
+                        
+                        <div class="flex items-center gap-2">
+                            <label for="status" class="text-gray-700 font-semibold">Update Status:</label>
+                            <select name="status" 
+                                    id="status"
+                                    class="px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-primary focus:outline-none transition-colors">
+                                <option value="Pending" selected="@(Model.Status == "Pending")">Pending</option>
+                                <option value="Processing" selected="@(Model.Status == "Processing")">Processing</option>
+                                <option value="Completed" selected="@(Model.Status == "Completed")">Completed</option>
+                                <option value="Cancelled" selected="@(Model.Status == "Cancelled")">Cancelled</option>
+                            </select>
+                            <button type="submit" 
+                                    class="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300">
+                                <i class="fas fa-check mr-2"></i> Update Status
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            }
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-3">
+                <a asp-action="Index" 
+                   class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Orders
+                </a>
+                @if (ViewBag.IsAdmin == true)
+                {
+                    <a asp-action="Delete" asp-route-id="@Model.OrderID" 
+                       class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors">
+                        <i class="fas fa-trash-alt mr-2"></i> Delete Order
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

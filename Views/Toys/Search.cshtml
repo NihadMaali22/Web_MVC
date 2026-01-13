@@ -1,0 +1,37 @@
+@model IEnumerable<lily.Models.Toy>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Search Results</h2>
+            <hr />
+            
+            @if (ViewBag.SearchTerm != null)
+            {
+                <p>Showing results for: <strong>@ViewBag.SearchTerm</strong></p>
+            }
+            
+            @if (Model != null && Model.Any())
+            {
+                <div class="row">
+                    @foreach (var toy in Model)
+                    {
+                        @await Html.PartialAsync("_ToyCard", toy)
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <h4>No results found</h4>
+                    <p>We couldn't find any toys matching your search.</p>
+                    <a asp-controller="Toys" asp-action="Index" class="btn btn-primary">View All Toys</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
