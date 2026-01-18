@@ -86,6 +86,7 @@ namespace lily.Controllers
         // GET: Account/Logout
         public IActionResult Logout()
         {
+            // Clear session
             HttpContext.Session.Clear();
             TempData["SuccessMessage"] = "You have been logged out successfully!";
             return RedirectToAction("Login");

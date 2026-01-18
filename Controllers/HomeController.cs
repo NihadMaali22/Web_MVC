@@ -24,7 +24,7 @@ namespace lily.Controllers
             var allToys = await _toysRepository.GetAllAsync();
             var featuredToys = allToys
                 .Where(t => t.IsActive == true)
-                .Take(6)
+                .Take(7)
                 .ToList();
 
             ViewBag.Username = HttpContext.Session.GetString("Username");

@@ -8,7 +8,7 @@ namespace lily.Controllers
     {
         private readonly ToysRepository _toysRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
+        //dependency injection
         public ToysController(ToysRepository toysRepository, IWebHostEnvironment webHostEnvironment)
         {
             _toysRepository = toysRepository;
@@ -104,7 +104,7 @@ namespace lily.Controllers
             
             if (ModelState.IsValid)
             {
-                // Handle image upload
+                // Handle image upload to add imgage to toy
                 if (imageFile != null && imageFile.Length > 0)
                 {
                     string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "toys");

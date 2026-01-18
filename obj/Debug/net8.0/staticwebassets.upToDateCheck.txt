@@ -9,7 +9,9 @@ wwwroot\images\6.png
 wwwroot\images\7.png
 wwwroot\images\8.png
 wwwroot\images\placeholder.png
+wwwroot\images\toys\47eb6942-bcbc-4143-bf8b-20ac9ae448ee_maryam.jpeg
 wwwroot\images\toys\64c4db43-443c-4c9f-a53b-1c1e1fe54806_personal photo.png
+wwwroot\images\toys\9860484d-dd63-4fe6-91e7-a1106a9a34e4_maryam.jpeg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

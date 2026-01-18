@@ -39,7 +39,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+//session
 app.UseSession();
 
 app.UseAuthorization();

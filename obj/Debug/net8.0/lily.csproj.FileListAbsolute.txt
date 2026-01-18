@@ -277,3 +277,4 @@ C:\Users\nihad\Desktop\toyspro\lily\lily\obj\Debug\net8.0\lily.genruntimeconfig.
 C:\Users\nihad\Desktop\toyspro\lily\lily\obj\Debug\net8.0\ref\lily.dll
 C:\Users\nihad\Desktop\toyspro\lily\lily\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\nihad\source\repos\lily\lily\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\nihad\source\repos\lily\lily\obj\Debug\net8.0\lily.sourcelink.json
